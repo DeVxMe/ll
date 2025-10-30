@@ -1,6 +1,12 @@
 export const IDL = {
   "version": "0.1.0",
   "name": "soldrive",
+  "address": "CxDoRt3Nt5z747KNW6vkVxvQQ7c2dHMmGmoWNmxejA3f",
+  "metadata": {
+    "name": "soldrive",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
   "instructions": [
     {
       "name": "helloSoldrive",

@@ -39,7 +39,7 @@ export const FileList = ({ refreshTrigger }: { refreshTrigger?: number }) => {
       const provider = getProvider(wallet);
       if (!provider) return;
 
-      const program = new anchor.Program(IDL as any, PROGRAM_ID as any, provider as any);
+      const program = new anchor.Program(IDL as any, provider);
       
       // Fetch all file records for this user
       const accounts = await connection.getProgramAccounts(PROGRAM_ID, {
@@ -88,7 +88,7 @@ export const FileList = ({ refreshTrigger }: { refreshTrigger?: number }) => {
       const provider = getProvider(wallet);
       if (!provider) return;
 
-      const program = new anchor.Program(IDL as any, PROGRAM_ID as any, provider as any);
+      const program = new anchor.Program(IDL as any, provider);
 
       if (file.isPublic) {
         await program.methods
@@ -128,7 +128,7 @@ export const FileList = ({ refreshTrigger }: { refreshTrigger?: number }) => {
       const provider = getProvider(wallet);
       if (!provider) return;
 
-      const program = new anchor.Program(IDL as any, PROGRAM_ID as any, provider as any);
+      const program = new anchor.Program(IDL as any, provider);
       const sharedAccessPda = getSharedAccessPda(sharingFile.pda, sharedWithPubkey);
 
       await program.methods
