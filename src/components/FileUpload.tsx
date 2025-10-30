@@ -80,12 +80,14 @@ export const FileUpload = ({ onUploadComplete }: { onUploadComplete?: () => void
       const fileBuffer = await file.arrayBuffer();
       const wordArray = crypto.lib.WordArray.create(new Uint8Array(fileBuffer));
       const hash = crypto.SHA256(wordArray);
-      const fileHash = Array.from(new Uint8Array(hash.words.flatMap(word => [
-        (word >> 24) & 0xff,
-        (word >> 16) & 0xff,
-        (word >> 8) & 0xff,
-        word & 0xff
-      ])));
+      const hashBytes = new Uint8Array(32);
+      hash.words.forEach((word: number, i: number) => {
+        hashBytes[i * 4] = (word >> 24) & 0xff;
+        hashBytes[i * 4 + 1] = (word >> 16) & 0xff;
+        hashBytes[i * 4 + 2] = (word >> 8) & 0xff;
+        hashBytes[i * 4 + 3] = word & 0xff;
+      });
+      const fileHash = Array.from(hashBytes);
 
       // Calculate chunk count (1MB chunks)
       const chunkSize = 1024 * 1024;
@@ -124,7 +126,15 @@ export const FileUpload = ({ onUploadComplete }: { onUploadComplete?: () => void
 
       // Step 3: Create file record
       updateStep(3, 'processing');
-      const timestamp = new anchor.BN(Math.floor(Date.now() / 1000));
+      const timestamp = Math.floor(Date.now() / 1000);
+      
+      console.log('Creating file with params:', {
+        fileName: file.name,
+        fileSize: file.size,
+        hashLength: fileHash.length,
+        chunkCount,
+        timestamp
+      });
       
       await program.methods
         .createFile(
@@ -132,7 +142,7 @@ export const FileUpload = ({ onUploadComplete }: { onUploadComplete?: () => void
           new anchor.BN(file.size),
           fileHash,
           chunkCount,
-          timestamp
+          new anchor.BN(timestamp)
         )
         .accounts({
           fileRecord: fileRecordPda,
@@ -146,7 +156,7 @@ export const FileUpload = ({ onUploadComplete }: { onUploadComplete?: () => void
 
       // Step 4: Register storage (IPFS CID)
       updateStep(4, 'processing');
-      const merkleRoot = Array(32).fill(0); // Simplified for demo
+      const merkleRoot = new Array(32).fill(0);
       
       await program.methods
         .registerStorage(ipfsCid, merkleRoot)
