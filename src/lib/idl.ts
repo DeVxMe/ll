@@ -1,493 +1,496 @@
-export const IDL = {
-  "version": "0.1.0",
-  "name": "soldrive",
-  "address": "CxDoRt3Nt5z747KNW6vkVxvQQ7c2dHMmGmoWNmxejA3f",
-  "metadata": {
-    "name": "soldrive",
-    "version": "0.1.0",
-    "spec": "0.1.0"
-  },
-  "instructions": [
+export type Soldrive = {
+  version: "0.1.0";
+  name: "soldrive";
+  instructions: Array<any>;
+  accounts: Array<any>;
+  types: Array<any>;
+  errors: Array<any>;
+};
+
+export const IDL: Soldrive = {
+  version: "0.1.0",
+  name: "soldrive",
+  instructions: [
     {
-      "name": "helloSoldrive",
-      "accounts": [],
-      "args": []
+      name: "helloSoldrive",
+      accounts: [],
+      args: []
     },
     {
-      "name": "initialize",
-      "accounts": [
+      name: "initialize",
+      accounts: [
         {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
+          name: "config",
+          isMut: true,
+          isSigner: false
         },
         {
-          "name": "authority",
-          "isMut": true,
-          "isSigner": true
+          name: "authority",
+          isMut: true,
+          isSigner: true
         },
         {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
+          name: "systemProgram",
+          isMut: false,
+          isSigner: false
         }
       ],
-      "args": []
+      args: []
     },
     {
-      "name": "createUserProfile",
-      "accounts": [
+      name: "createUserProfile",
+      accounts: [
         {
-          "name": "userProfile",
-          "isMut": true,
-          "isSigner": false
+          name: "userProfile",
+          isMut: true,
+          isSigner: false
         },
         {
-          "name": "user",
-          "isMut": true,
-          "isSigner": true
+          name: "user",
+          isMut: true,
+          isSigner: true
         },
         {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
+          name: "systemProgram",
+          isMut: false,
+          isSigner: false
         }
       ],
-      "args": []
+      args: []
     },
     {
-      "name": "createFile",
-      "accounts": [
+      name: "createFile",
+      accounts: [
         {
-          "name": "fileRecord",
-          "isMut": true,
-          "isSigner": false
+          name: "fileRecord",
+          isMut: true,
+          isSigner: false
         },
         {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
+          name: "config",
+          isMut: true,
+          isSigner: false
         },
         {
-          "name": "userProfile",
-          "isMut": true,
-          "isSigner": false
+          name: "userProfile",
+          isMut: true,
+          isSigner: false
         },
         {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
+          name: "owner",
+          isMut: true,
+          isSigner: true
         },
         {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
+          name: "systemProgram",
+          isMut: false,
+          isSigner: false
         }
       ],
-      "args": [
+      args: [
         {
-          "name": "fileName",
-          "type": "string"
+          name: "fileName",
+          type: "string"
         },
         {
-          "name": "fileSize",
-          "type": "u64"
+          name: "fileSize",
+          type: "u64"
         },
         {
-          "name": "fileHash",
-          "type": {
-            "array": ["u8", 32]
+          name: "fileHash",
+          type: {
+            array: ["u8", 32]
           }
         },
         {
-          "name": "chunkCount",
-          "type": "u32"
+          name: "chunkCount",
+          type: "u32"
         },
         {
-          "name": "timestamp",
-          "type": "i64"
+          name: "timestamp",
+          type: "i64"
         }
       ]
     },
     {
-      "name": "registerStorage",
-      "accounts": [
+      name: "registerStorage",
+      accounts: [
         {
-          "name": "fileRecord",
-          "isMut": true,
-          "isSigner": false
+          name: "fileRecord",
+          isMut: true,
+          isSigner: false
         },
         {
-          "name": "owner",
-          "isMut": false,
-          "isSigner": true
+          name: "owner",
+          isMut: false,
+          isSigner: true
         }
       ],
-      "args": [
+      args: [
         {
-          "name": "primaryStorage",
-          "type": "string"
+          name: "primaryStorage",
+          type: "string"
         },
         {
-          "name": "merkleRoot",
-          "type": {
-            "array": ["u8", 32]
-          }
-        }
-      ]
-    },
-    {
-      "name": "finalizeFile",
-      "accounts": [
-        {
-          "name": "fileRecord",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "owner",
-          "isMut": false,
-          "isSigner": true
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "grantAccess",
-      "accounts": [
-        {
-          "name": "sharedAccess",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "fileRecord",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "sharedWith",
-          "type": "publicKey"
-        },
-        {
-          "name": "accessLevel",
-          "type": {
-            "defined": "AccessLevel"
-          }
-        },
-        {
-          "name": "expiresAt",
-          "type": {
-            "option": "i64"
+          name: "merkleRoot",
+          type: {
+            array: ["u8", 32]
           }
         }
       ]
     },
     {
-      "name": "revokeAccess",
-      "accounts": [
+      name: "finalizeFile",
+      accounts: [
         {
-          "name": "sharedAccess",
-          "isMut": true,
-          "isSigner": false
+          name: "fileRecord",
+          isMut: true,
+          isSigner: false
         },
         {
-          "name": "fileRecord",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "owner",
-          "isMut": false,
-          "isSigner": true
+          name: "owner",
+          isMut: false,
+          isSigner: true
         }
       ],
-      "args": []
+      args: []
     },
     {
-      "name": "makePublic",
-      "accounts": [
+      name: "grantAccess",
+      accounts: [
         {
-          "name": "fileRecord",
-          "isMut": true,
-          "isSigner": false
+          name: "sharedAccess",
+          isMut: true,
+          isSigner: false
         },
         {
-          "name": "owner",
-          "isMut": false,
-          "isSigner": true
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "makePrivate",
-      "accounts": [
-        {
-          "name": "fileRecord",
-          "isMut": true,
-          "isSigner": false
+          name: "fileRecord",
+          isMut: false,
+          isSigner: false
         },
         {
-          "name": "owner",
-          "isMut": false,
-          "isSigner": true
+          name: "owner",
+          isMut: true,
+          isSigner: true
+        },
+        {
+          name: "systemProgram",
+          isMut: false,
+          isSigner: false
         }
       ],
-      "args": []
+      args: [
+        {
+          name: "sharedWith",
+          type: "publicKey"
+        },
+        {
+          name: "accessLevel",
+          type: {
+            defined: "AccessLevel"
+          }
+        },
+        {
+          name: "expiresAt",
+          type: {
+            option: "i64"
+          }
+        }
+      ]
+    },
+    {
+      name: "revokeAccess",
+      accounts: [
+        {
+          name: "sharedAccess",
+          isMut: true,
+          isSigner: false
+        },
+        {
+          name: "fileRecord",
+          isMut: false,
+          isSigner: false
+        },
+        {
+          name: "owner",
+          isMut: false,
+          isSigner: true
+        }
+      ],
+      args: []
+    },
+    {
+      name: "makePublic",
+      accounts: [
+        {
+          name: "fileRecord",
+          isMut: true,
+          isSigner: false
+        },
+        {
+          name: "owner",
+          isMut: false,
+          isSigner: true
+        }
+      ],
+      args: []
+    },
+    {
+      name: "makePrivate",
+      accounts: [
+        {
+          name: "fileRecord",
+          isMut: true,
+          isSigner: false
+        },
+        {
+          name: "owner",
+          isMut: false,
+          isSigner: true
+        }
+      ],
+      args: []
     }
   ],
-  "accounts": [
+  accounts: [
     {
-      "name": "SolDriveConfig",
-      "type": {
-        "kind": "struct",
-        "fields": [
+      name: "SolDriveConfig",
+      type: {
+        kind: "struct",
+        fields: [
           {
-            "name": "authority",
-            "type": "publicKey"
+            name: "authority",
+            type: "publicKey"
           },
           {
-            "name": "totalFiles",
-            "type": "u64"
+            name: "totalFiles",
+            type: "u64"
           },
           {
-            "name": "storageFeePerGb",
-            "type": "u64"
+            name: "storageFeePerGb",
+            type: "u64"
           },
           {
-            "name": "maxFileSize",
-            "type": "u64"
+            name: "maxFileSize",
+            type: "u64"
           }
         ]
       }
     },
     {
-      "name": "UserProfile",
-      "type": {
-        "kind": "struct",
-        "fields": [
+      name: "UserProfile",
+      type: {
+        kind: "struct",
+        fields: [
           {
-            "name": "owner",
-            "type": "publicKey"
+            name: "owner",
+            type: "publicKey"
           },
           {
-            "name": "filesOwned",
-            "type": "u64"
+            name: "filesOwned",
+            type: "u64"
           },
           {
-            "name": "storageUsed",
-            "type": "u64"
+            name: "storageUsed",
+            type: "u64"
           },
           {
-            "name": "storagePaidUntil",
-            "type": "i64"
+            name: "storagePaidUntil",
+            type: "i64"
           },
           {
-            "name": "reputationScore",
-            "type": "u32"
+            name: "reputationScore",
+            type: "u32"
           }
         ]
       }
     },
     {
-      "name": "FileRecord",
-      "type": {
-        "kind": "struct",
-        "fields": [
+      name: "FileRecord",
+      type: {
+        kind: "struct",
+        fields: [
           {
-            "name": "owner",
-            "type": "publicKey"
+            name: "owner",
+            type: "publicKey"
           },
           {
-            "name": "fileName",
-            "type": "string"
+            name: "fileName",
+            type: "string"
           },
           {
-            "name": "fileSize",
-            "type": "u64"
+            name: "fileSize",
+            type: "u64"
           },
           {
-            "name": "fileHash",
-            "type": {
-              "array": ["u8", 32]
+            name: "fileHash",
+            type: {
+              array: ["u8", 32]
             }
           },
           {
-            "name": "chunkCount",
-            "type": "u32"
+            name: "chunkCount",
+            type: "u32"
           },
           {
-            "name": "merkleRoot",
-            "type": {
-              "array": ["u8", 32]
+            name: "merkleRoot",
+            type: {
+              array: ["u8", 32]
             }
           },
           {
-            "name": "primaryStorage",
-            "type": "string"
+            name: "primaryStorage",
+            type: "string"
           },
           {
-            "name": "createdAt",
-            "type": "i64"
+            name: "createdAt",
+            type: "i64"
           },
           {
-            "name": "updatedAt",
-            "type": "i64"
+            name: "updatedAt",
+            type: "i64"
           },
           {
-            "name": "status",
-            "type": {
-              "defined": "FileStatus"
+            name: "status",
+            type: {
+              defined: "FileStatus"
             }
           },
           {
-            "name": "isPublic",
-            "type": "bool"
+            name: "isPublic",
+            type: "bool"
           }
         ]
       }
     },
     {
-      "name": "SharedAccess",
-      "type": {
-        "kind": "struct",
-        "fields": [
+      name: "SharedAccess",
+      type: {
+        kind: "struct",
+        fields: [
           {
-            "name": "fileRecord",
-            "type": "publicKey"
+            name: "fileRecord",
+            type: "publicKey"
           },
           {
-            "name": "owner",
-            "type": "publicKey"
+            name: "owner",
+            type: "publicKey"
           },
           {
-            "name": "sharedWith",
-            "type": "publicKey"
+            name: "sharedWith",
+            type: "publicKey"
           },
           {
-            "name": "accessLevel",
-            "type": {
-              "defined": "AccessLevel"
+            name: "accessLevel",
+            type: {
+              defined: "AccessLevel"
             }
           },
           {
-            "name": "expiresAt",
-            "type": {
-              "option": "i64"
+            name: "expiresAt",
+            type: {
+              option: "i64"
             }
           },
           {
-            "name": "createdAt",
-            "type": "i64"
+            name: "createdAt",
+            type: "i64"
           },
           {
-            "name": "isActive",
-            "type": "bool"
+            name: "isActive",
+            type: "bool"
           }
         ]
       }
     }
   ],
-  "types": [
+  types: [
     {
-      "name": "AccessLevel",
-      "type": {
-        "kind": "enum",
-        "variants": [
+      name: "AccessLevel",
+      type: {
+        kind: "enum",
+        variants: [
           {
-            "name": "Read"
+            name: "Read"
           },
           {
-            "name": "Write"
+            name: "Write"
           },
           {
-            "name": "Admin"
+            name: "Admin"
           }
         ]
       }
     },
     {
-      "name": "FileStatus",
-      "type": {
-        "kind": "enum",
-        "variants": [
+      name: "FileStatus",
+      type: {
+        kind: "enum",
+        variants: [
           {
-            "name": "Uploading"
+            name: "Uploading"
           },
           {
-            "name": "Processing"
+            name: "Processing"
           },
           {
-            "name": "Active"
+            name: "Active"
           },
           {
-            "name": "Archived"
+            name: "Archived"
           },
           {
-            "name": "Deleted"
+            name: "Deleted"
           }
         ]
       }
     }
   ],
-  "errors": [
+  errors: [
     {
-      "code": 6000,
-      "name": "FileNameTooLong",
-      "msg": "File name is too long (max 50 characters)"
+      code: 6000,
+      name: "FileNameTooLong",
+      msg: "File name is too long (max 50 characters)"
     },
     {
-      "code": 6001,
-      "name": "InvalidFileSize",
-      "msg": "Invalid file size"
+      code: 6001,
+      name: "InvalidFileSize",
+      msg: "Invalid file size"
     },
     {
-      "code": 6002,
-      "name": "InvalidChunkCount",
-      "msg": "Invalid chunk count"
+      code: 6002,
+      name: "InvalidChunkCount",
+      msg: "Invalid chunk count"
     },
     {
-      "code": 6003,
-      "name": "StorageLocationTooLong",
-      "msg": "Storage location string is too long (max 100 characters)"
+      code: 6003,
+      name: "StorageLocationTooLong",
+      msg: "Storage location string is too long (max 100 characters)"
     },
     {
-      "code": 6004,
-      "name": "StorageLocationEmpty",
-      "msg": "Storage location cannot be empty"
+      code: 6004,
+      name: "StorageLocationEmpty",
+      msg: "Storage location cannot be empty"
     },
     {
-      "code": 6005,
-      "name": "InvalidFileStatus",
-      "msg": "Invalid file status for this operation"
+      code: 6005,
+      name: "InvalidFileStatus",
+      msg: "Invalid file status for this operation"
     },
     {
-      "code": 6006,
-      "name": "NoStorageLocation",
-      "msg": "No storage location registered"
+      code: 6006,
+      name: "NoStorageLocation",
+      msg: "No storage location registered"
     },
     {
-      "code": 6007,
-      "name": "FileNotActive",
-      "msg": "File must be active to share"
+      code: 6007,
+      name: "FileNotActive",
+      msg: "File must be active to share"
     },
     {
-      "code": 6008,
-      "name": "InvalidExpirationTime",
-      "msg": "Expiration time must be in the future"
+      code: 6008,
+      name: "InvalidExpirationTime",
+      msg: "Expiration time must be in the future"
     }
   ]
-};
+} as const;

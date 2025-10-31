@@ -96,7 +96,7 @@ export const FileUpload = ({ onUploadComplete }: { onUploadComplete?: () => void
       const provider = getProvider(wallet);
       if (!provider) throw new Error('Provider not available');
 
-      const program = new anchor.Program(IDL as any, provider);
+      const program = new anchor.Program(IDL, provider);
 
       // Get PDAs
       const userProfilePda = getUserProfilePda(publicKey);
