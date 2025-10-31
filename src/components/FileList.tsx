@@ -39,7 +39,7 @@ export const FileList = ({ refreshTrigger }: { refreshTrigger?: number }) => {
       const provider = getProvider(wallet);
       if (!provider) return;
 
-      const program = new anchor.Program(IDL, provider);
+      const program = new anchor.Program(IDL as any, provider);
       
       // Fetch all file records for this user
       const accounts = await connection.getProgramAccounts(PROGRAM_ID, {

@@ -1,15 +1,12 @@
-export type Soldrive = {
-  version: "0.1.0";
-  name: "soldrive";
-  instructions: Array<any>;
-  accounts: Array<any>;
-  types: Array<any>;
-  errors: Array<any>;
-};
-
-export const IDL: Soldrive = {
+export const IDL = {
   version: "0.1.0",
   name: "soldrive",
+  address: "CxDoRt3Nt5z747KNW6vkVxvQQ7c2dHMmGmoWNmxejA3f",
+  metadata: {
+    name: "soldrive",
+    version: "0.1.0",
+    spec: "0.1.0"
+  },
   instructions: [
     {
       name: "helloSoldrive",
@@ -493,4 +490,4 @@ export const IDL: Soldrive = {
       msg: "Expiration time must be in the future"
     }
   ]
-} as const;
+};

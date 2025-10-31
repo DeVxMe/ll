@@ -10,21 +10,14 @@ export const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 export const getProvider = (wallet: any) => {
   if (!wallet || !wallet.publicKey) return null;
   
-  const walletWrapper = {
-    publicKey: wallet.publicKey,
-    signTransaction: wallet.signTransaction?.bind(wallet),
-    signAllTransactions: wallet.signAllTransactions?.bind(wallet) || (async (txs: any[]) => {
-      if (wallet.signTransaction) {
-        return Promise.all(txs.map(tx => wallet.signTransaction(tx)));
-      }
-      return txs;
-    }),
-  };
-  
   return new anchor.AnchorProvider(
     connection,
-    walletWrapper as any,
-    { commitment: 'confirmed', preflightCommitment: 'confirmed' }
+    wallet as any,
+    { 
+      commitment: 'confirmed', 
+      preflightCommitment: 'confirmed',
+      skipPreflight: false
+    }
   );
 };
 
